@@ -1,0 +1,309 @@
+---
+layout:      post
+title:       LeetCode Biweekly Contest 19 (1342~1345)
+link:        https://programcz.github.io/2020/02/09/LeetCode-Biweekly-Contest-19-(1342-1345).html
+date:        2020-02-09 10:24:00
+category:    个人博客
+source:      ProgramCZ's Blog
+description: LeetCode双周赛专题每双周日更新，点击标签CAT - LeetCode Biweekly Contest查看更多。  1342. Number of Steps to Reduce a Number to Zero #Easy 题目描述 Given a non-negative integer
+---
+
+<p>LeetCode双周赛专题每双周日更新，点击标签<code class="language-plaintext highlighter-rouge">CAT - LeetCode Biweekly Contest</code>查看更多。</p>
+
+<!--more-->
+
+<h2 id="1342-number-of-steps-to-reduce-a-number-to-zero-easy">1342. Number of Steps to Reduce a Number to Zero #Easy</h2>
+
+<h3 id="题目描述">题目描述</h3>
+
+<p>Given a non-negative integer <code class="language-plaintext highlighter-rouge">num</code>, return the number of steps to reduce it to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 14
+Output: 6
+Explanation: 
+Step 1) 14 is even; divide by 2 and obtain 7. 
+Step 2) 7 is odd; subtract 1 and obtain 6.
+Step 3) 6 is even; divide by 2 and obtain 3. 
+Step 4) 3 is odd; subtract 1 and obtain 2. 
+Step 5) 2 is even; divide by 2 and obtain 1. 
+Step 6) 1 is odd; subtract 1 and obtain 0.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 8
+Output: 4
+Explanation: 
+Step 1) 8 is even; divide by 2 and obtain 4. 
+Step 2) 4 is even; divide by 2 and obtain 2. 
+Step 3) 2 is even; divide by 2 and obtain 1. 
+Step 4) 1 is odd; subtract 1 and obtain 0.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 123
+Output: 12
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= num &lt;= 10^6</code></li>
+</ul>
+
+<h3 id="题目解析">题目解析</h3>
+
+<p>根据题目要求模拟整个计算过程，同时计数即可。</p>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">numberOfSteps</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="n">num</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">else</span> <span class="n">num</span> <span class="o">/=</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="o">++</span><span class="n">res</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1343-number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold-medium">1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold #Medium</h2>
+
+<h3 id="题目描述-1">题目描述</h3>
+
+<p>Given an array of integers <code class="language-plaintext highlighter-rouge">arr</code> and two integers <code class="language-plaintext highlighter-rouge">k</code> and <code class="language-plaintext highlighter-rouge">threshold</code>.</p>
+
+<p>Return <em>the number of sub-arrays</em> of size <code class="language-plaintext highlighter-rouge">k</code> and average greater than or equal to <code class="language-plaintext highlighter-rouge">threshold</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+Output: 3
+Explanation: Sub-arrays [2,5,5],[5,5,5] and [5,5,8] have averages 4, 5 and 6 respectively. All other sub-arrays of size 3 have averages less than 4 (the threshold).
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [1,1,1,1,1], k = 1, threshold = 0
+Output: 5
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [11,13,17,23,29,31,7,5,2,3], k = 3, threshold = 5
+Output: 6
+Explanation: The first 6 sub-arrays of size 3 have averages greater than 5. Note that averages are not integers.
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [7,7,7,7,7,7,7], k = 7, threshold = 7
+Output: 1
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [4,4,4,4], k = 4, threshold = 1
+Output: 1
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= arr.length &lt;= 10^5</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= arr[i] &lt;= 10^4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= k &lt;= arr.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= threshold &lt;= 10^4</code></li>
+</ul>
+
+<h3 id="题目解析-1">题目解析</h3>
+
+<p>使用滑动窗口遍历数组<code class="language-plaintext highlighter-rouge">arr</code>，增量计算窗口的和，判断是否满足题目要求，同时计数即可。</p>
+
+<h4 id="c-实现-1">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">numOfSubarrays</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">threshold</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">sum</span> <span class="o">-=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">sum</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="o">*</span><span class="n">threshold</span><span class="p">)</span>
+                <span class="o">++</span><span class="n">res</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1344-angle-between-hands-of-a-clock-medium">1344. Angle Between Hands of a Clock #Medium</h2>
+
+<h3 id="题目描述-2">题目描述</h3>
+
+<p>Given two numbers, <code class="language-plaintext highlighter-rouge">hour</code> and <code class="language-plaintext highlighter-rouge">minutes</code>. Return the smaller angle (in sexagesimal units) formed between the <code class="language-plaintext highlighter-rouge">hour</code> and the <code class="language-plaintext highlighter-rouge">minute</code> hand.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2019/12/26/sample_1_1673.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: hour = 12, minutes = 30
+Output: 165
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2019/12/26/sample_2_1673.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: hour = 3, minutes = 30
+Output: 75
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2019/12/26/sample_3_1673.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: hour = 3, minutes = 15
+Output: 7.5
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: hour = 4, minutes = 50
+Output: 155
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: hour = 12, minutes = 0
+Output: 0
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= hour &lt;= 12</code></li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= minutes &lt;= 59</code></li>
+  <li>Answers within <code class="language-plaintext highlighter-rouge">10^-5</code> of the actual value will be accepted as correct.</li>
+</ul>
+
+<h3 id="题目解析-2">题目解析</h3>
+
+<p>首先时针走过的格数为小时数<code class="language-plaintext highlighter-rouge">hour+minutes/60.0</code>乘以<code class="language-plaintext highlighter-rouge">5</code>，分针走过的格数为分钟数，两者之间的角度为格数之差乘以<code class="language-plaintext highlighter-rouge">6</code>，最后返回小于等于<code class="language-plaintext highlighter-rouge">180</code>的计算结果即可。</p>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">double</span> <span class="n">angleClock</span><span class="p">(</span><span class="kt">int</span> <span class="n">hour</span><span class="p">,</span> <span class="kt">int</span> <span class="n">minutes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">double</span> <span class="n">unit_h</span> <span class="o">=</span> <span class="p">(</span><span class="n">hour</span> <span class="o">+</span> <span class="n">minutes</span> <span class="o">/</span> <span class="mf">60.0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">unit_m</span> <span class="o">=</span> <span class="n">minutes</span><span class="p">;</span>
+        <span class="kt">double</span> <span class="n">res</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">unit_h</span><span class="o">-</span><span class="n">unit_m</span><span class="p">)</span> <span class="o">*</span> <span class="mi">6</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="mi">180</span> <span class="o">?</span> <span class="n">res</span> <span class="o">:</span> <span class="p">(</span><span class="mi">360</span> <span class="o">-</span> <span class="n">res</span><span class="p">);</span> 
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1345-jump-game-iv-hard">1345. Jump Game IV #Hard</h2>
+
+<h3 id="题目描述-3">题目描述</h3>
+
+<p>Given an array of integers <code class="language-plaintext highlighter-rouge">arr</code>, you are initially positioned at the first index of the array.</p>
+
+<p>In one step you can jump from index <code class="language-plaintext highlighter-rouge">i</code> to index:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">i + 1</code> where: <code class="language-plaintext highlighter-rouge">i + 1 &lt; arr.length</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">i - 1</code> where: <code class="language-plaintext highlighter-rouge">i - 1 &gt;= 0</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">j</code> where: <code class="language-plaintext highlighter-rouge">arr[i] == arr[j] and i != j</code>.</li>
+</ul>
+
+<p>Return <em>the minimum number of steps</em> to reach the <strong>last index</strong> of the array.</p>
+
+<p>Notice that you can not jump outside of the array at any time.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [100,-23,-23,404,100,23,23,23,3,404]
+Output: 3
+Explanation: You need three jumps from index 0 --&gt; 4 --&gt; 3 --&gt; 9. Note that index 9 is the last index of the array.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [7]
+Output: 0
+Explanation: Start index is the last index. You don't need to jump.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [7,6,9,6,9,6,9,7]
+Output: 1
+Explanation: You can jump directly from index 0 to index 7 which is last index of the array.
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [6,1,9]
+Output: 2
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [11,22,7,7,7,7,7,7,7,22,13]
+Output: 3
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= arr.length &lt;= 5 * 10^4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-10^8 &lt;= arr[i] &lt;= 10^8</code></li>
+</ul>
+
+<h3 id="题目解析-3">题目解析</h3>
+
+<p>广度优先搜索。首先，声明<code class="language-plaintext highlighter-rouge">um</code>用于存放所有相同数字的下标，声明<code class="language-plaintext highlighter-rouge">q</code>用于存放当前步能够走的下标，声明<code class="language-plaintext highlighter-rouge">visited</code>用于判断下标是否访问过；其次，使用广度优先搜索算法模拟访问过程，同时计数，需要注意的是<code class="language-plaintext highlighter-rouge">next.clear()</code>，将已经访问过的相同数字的下标清空，避免后续访问导致超时；最后，返回计数结果即可。</p>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">minJumps</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">arr</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">um</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">um</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span> <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">visited</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="n">visited</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">idx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+                <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">next</span> <span class="o">=</span> <span class="n">um</span><span class="p">[</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]];</span>
+                <span class="n">next</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+                <span class="n">next</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">:</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                        <span class="n">q</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="n">next</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="o">++</span><span class="n">res</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>

@@ -1,0 +1,343 @@
+---
+layout:      post
+title:       LeetCode Weekly Contest 175 (1346~1349)
+link:        https://programcz.github.io/2020/02/09/LeetCode-Weekly-Contest-175-(1346-1349).html
+date:        2020-02-09 10:24:01
+category:    个人博客
+source:      ProgramCZ's Blog
+description: LeetCode周赛专题每周日更新，点击标签CAT - LeetCode Weekly Contest查看更多。  1346. Check If N and Its Double Exist #Easy 题目描述 Given an array arr of integers, check if th
+---
+
+<p>LeetCode周赛专题每周日更新，点击标签<code class="language-plaintext highlighter-rouge">CAT - LeetCode Weekly Contest</code>查看更多。</p>
+
+<!--more-->
+
+<h2 id="1346-check-if-n-and-its-double-exist-easy">1346. Check If N and Its Double Exist #Easy</h2>
+
+<h3 id="题目描述">题目描述</h3>
+
+<p>Given an array <code class="language-plaintext highlighter-rouge">arr</code> of integers, check if there exists two integers <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge">M</code> such that <code class="language-plaintext highlighter-rouge">N</code> is the double of <code class="language-plaintext highlighter-rouge">M</code> ( i.e. <code class="language-plaintext highlighter-rouge">N = 2 * M</code>).</p>
+
+<p>More formally check if there exists two indices <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code> such that :</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">i != j</code></li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= i, j &lt; arr.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">arr[i] == 2 * arr[j]</code></li>
+</ul>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [10,2,5,3]
+Output: true
+Explanation: N = 10 is the double of M = 5,that is, 10 = 2 * 5.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [7,1,14,11]
+Output: true
+Explanation: N = 14 is the double of M = 7,that is, 14 = 2 * 7.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: arr = [3,1,7,11]
+Output: false
+Explanation: In this case does not exist N and M, such that N = 2 * M.
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">2 &lt;= arr.length &lt;= 500</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-10^3 &lt;= arr[i] &lt;= 10^3</code></li>
+</ul>
+
+<h3 id="题目解析">题目解析</h3>
+
+<p>遍历数组<code class="language-plaintext highlighter-rouge">arr</code>，维护集合<code class="language-plaintext highlighter-rouge">s</code>，用于存放数组<code class="language-plaintext highlighter-rouge">arr</code>中出现过的数字，如果出现以下两种情况，则直接返回<code class="language-plaintext highlighter-rouge">true</code>：</p>
+
+<ul>
+  <li>
+    <p>遍历到的<code class="language-plaintext highlighter-rouge">num</code>为偶数且其除以<code class="language-plaintext highlighter-rouge">2</code>的结果存在于集合<code class="language-plaintext highlighter-rouge">s</code>中。</p>
+  </li>
+  <li>
+    <p>遍历到的<code class="language-plaintext highlighter-rouge">num</code>乘以<code class="language-plaintext highlighter-rouge">2</code>的结果存在于集合<code class="language-plaintext highlighter-rouge">s</code>中。</p>
+  </li>
+</ul>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">bool</span> <span class="n">checkIfExist</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unordered_set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">num</span> <span class="o">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">num</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1347-minimum-number-of-steps-to-make-two-strings-anagram-medium">1347. Minimum Number of Steps to Make Two Strings Anagram #Medium</h2>
+
+<h3 id="题目描述-1">题目描述</h3>
+
+<p>Given two equal-size strings <code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">t</code>. In one step you can choose <strong>any character</strong> of <code class="language-plaintext highlighter-rouge">t</code> and replace it with <strong>another character</strong>.</p>
+
+<p>Return <em>the minimum number of steps</em> to make <code class="language-plaintext highlighter-rouge">t</code> an anagram of <code class="language-plaintext highlighter-rouge">s</code>.</p>
+
+<p>An <strong>Anagram</strong> of a string is a string that contains the same characters with a different (or the same) ordering.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "bab", t = "aba"
+Output: 1
+Explanation: Replace the first 'a' in t with b, t = "bba" which is anagram of s.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "leetcode", t = "practice"
+Output: 5
+Explanation: Replace 'p', 'r', 'a', 'i' and 'c' from t with proper characters to make t anagram of s.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "anagram", t = "mangaar"
+Output: 0
+Explanation: "anagram" and "mangaar" are anagrams. 
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "xxyyzz", t = "xxyyzz"
+Output: 0
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "friend", t = "family"
+Output: 4
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= s.length &lt;= 50000</code></li>
+  <li><code class="language-plaintext highlighter-rouge">s.length == t.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">s</code> and <code class="language-plaintext highlighter-rouge">t</code> contain lower-case English letters only.</li>
+</ul>
+
+<h3 id="题目解析-1">题目解析</h3>
+
+<p>首先，声明<code class="language-plaintext highlighter-rouge">um</code>，用于存放每个字符出现的次数；其次，遍历字符串<code class="language-plaintext highlighter-rouge">s</code>，累加字符出现的次数，遍历字符串<code class="language-plaintext highlighter-rouge">t</code>，累减字符串出现的次数，此时<code class="language-plaintext highlighter-rouge">um</code>中值为正数的字符即为<code class="language-plaintext highlighter-rouge">s</code>中有但<code class="language-plaintext highlighter-rouge">t</code>中没有的字符；最后，遍历<code class="language-plaintext highlighter-rouge">um</code>，累加正值即可。</p>
+
+<h4 id="c-实现-1">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">minSteps</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">,</span> <span class="n">string</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">um</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">ch</span> <span class="o">:</span> <span class="n">s</span><span class="p">)</span> <span class="o">++</span><span class="n">um</span><span class="p">[</span><span class="n">ch</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">ch</span> <span class="o">:</span> <span class="n">t</span><span class="p">)</span> <span class="o">--</span><span class="n">um</span><span class="p">[</span><span class="n">ch</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">:</span> <span class="n">um</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="n">p</span><span class="p">.</span><span class="n">second</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1348-tweet-counts-per-frequency-medium">1348. Tweet Counts Per Frequency #Medium</h2>
+
+<h3 id="题目描述-2">题目描述</h3>
+
+<p>Implement the class <code class="language-plaintext highlighter-rouge">TweetCounts</code> that supports two methods:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">recordTweet(string tweetName, int time)</code></p>
+
+    <ul>
+      <li>Stores the <code class="language-plaintext highlighter-rouge">tweetName</code> at the recorded <code class="language-plaintext highlighter-rouge">time</code> (in <strong>seconds</strong>).</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getTweetCountsPerFrequency(string freq, string tweetName, int startTime, int endTime)</code></p>
+
+    <ul>
+      <li>Returns the total number of occurrences for the given <code class="language-plaintext highlighter-rouge">tweetName</code> per <strong>minute</strong>, <strong>hour</strong>, or <strong>day</strong> (depending on <code class="language-plaintext highlighter-rouge">freq</code>) starting from the <code class="language-plaintext highlighter-rouge">startTime</code> (in <strong>seconds</strong>) and ending at the <code class="language-plaintext highlighter-rouge">endTime</code> (in <strong>seconds</strong>).</li>
+      <li><code class="language-plaintext highlighter-rouge">freq</code> is always <strong>minute</strong>, <strong>hour</strong> or <strong>day</strong>, representing the time interval to get the total number of occurrences for the given <code class="language-plaintext highlighter-rouge">tweetName</code>.</li>
+      <li>The first time interval always starts from the <code class="language-plaintext highlighter-rouge">startTime</code>, so the time intervals are <code class="language-plaintext highlighter-rouge">[startTime, startTime + delta*1&gt;,  [startTime + delta*1, startTime + delta*2&gt;, [startTime + delta*2, startTime + delta*3&gt;, ... , [startTime + delta*i, min(startTime + delta*(i+1), endTime + 1)&gt;</code> for some non-negative number <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">delta</code> (which depends on <code class="language-plaintext highlighter-rouge">freq</code>).</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input
+["TweetCounts","recordTweet","recordTweet","recordTweet","getTweetCountsPerFrequency","getTweetCountsPerFrequency","recordTweet","getTweetCountsPerFrequency"]
+[[],["tweet3",0],["tweet3",60],["tweet3",10],["minute","tweet3",0,59],["minute","tweet3",0,60],["tweet3",120],["hour","tweet3",0,210]]
+
+Output
+[null,null,null,null,[2],[2,1],null,[4]]
+
+Explanation
+TweetCounts tweetCounts = new TweetCounts();
+tweetCounts.recordTweet("tweet3", 0);
+tweetCounts.recordTweet("tweet3", 60);
+tweetCounts.recordTweet("tweet3", 10);                             // All tweets correspond to "tweet3" with recorded times at 0, 10 and 60.
+tweetCounts.getTweetCountsPerFrequency("minute", "tweet3", 0, 59); // return [2]. The frequency is per minute (60 seconds), so there is one interval of time: 1) [0, 60&gt; - &gt; 2 tweets.
+tweetCounts.getTweetCountsPerFrequency("minute", "tweet3", 0, 60); // return [2, 1]. The frequency is per minute (60 seconds), so there are two intervals of time: 1) [0, 60&gt; - &gt; 2 tweets, and 2) [60,61&gt; - &gt; 1 tweet.
+tweetCounts.recordTweet("tweet3", 120);                            // All tweets correspond to "tweet3" with recorded times at 0, 10, 60 and 120.
+tweetCounts.getTweetCountsPerFrequency("hour", "tweet3", 0, 210);  // return [4]. The frequency is per hour (3600 seconds), so there is one interval of time: 1) [0, 211&gt; - &gt; 4 tweets.
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li>There will be at most <code class="language-plaintext highlighter-rouge">10000</code> operations considering both <code class="language-plaintext highlighter-rouge">recordTweet</code> and <code class="language-plaintext highlighter-rouge">getTweetCountsPerFrequency</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= time, startTime, endTime &lt;= 10^9</code></li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= endTime - startTime &lt;= 10^4</code></li>
+</ul>
+
+<h3 id="题目解析-2">题目解析</h3>
+
+<p>首先，声明<code class="language-plaintext highlighter-rouge">rc</code>，用于存放字符串<code class="language-plaintext highlighter-rouge">tweetName</code>出现的时间<code class="language-plaintext highlighter-rouge">time</code>；其次，根据<code class="language-plaintext highlighter-rouge">freq</code>确定时间间隔<code class="language-plaintext highlighter-rouge">interval</code>，遍历对应的时间集合<code class="language-plaintext highlighter-rouge">pq</code>，累加<code class="language-plaintext highlighter-rouge">res</code>中对应的区间；最后，返回<code class="language-plaintext highlighter-rouge">res</code>即可。</p>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TweetCounts</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">TweetCounts</span><span class="p">()</span> <span class="p">{</span>
+        
+    <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">recordTweet</span><span class="p">(</span><span class="n">string</span> <span class="n">tweetName</span><span class="p">,</span> <span class="kt">int</span> <span class="n">time</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rc</span><span class="p">[</span><span class="n">tweetName</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">getTweetCountsPerFrequency</span><span class="p">(</span><span class="n">string</span> <span class="n">freq</span><span class="p">,</span> <span class="n">string</span> <span class="n">tweetName</span><span class="p">,</span> <span class="kt">int</span> <span class="n">startTime</span><span class="p">,</span> <span class="kt">int</span> <span class="n">endTime</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pq</span> <span class="o">=</span> <span class="n">rc</span><span class="p">[</span><span class="n">tweetName</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">60</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">freq</span> <span class="o">==</span> <span class="s">"hour"</span><span class="p">)</span> <span class="n">interval</span> <span class="o">*=</span> <span class="mi">60</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">freq</span> <span class="o">==</span> <span class="s">"day"</span><span class="p">)</span> <span class="n">interval</span> <span class="o">*=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">24</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="p">(</span><span class="n">endTime</span> <span class="o">-</span> <span class="n">startTime</span><span class="p">)</span> <span class="o">/</span> <span class="n">interval</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">v</span> <span class="o">:</span> <span class="n">pq</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">v</span> <span class="o">&lt;</span> <span class="n">startTime</span> <span class="o">||</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">endTime</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+            <span class="o">++</span><span class="n">res</span><span class="p">[(</span><span class="n">v</span><span class="o">-</span><span class="n">startTime</span><span class="p">)</span><span class="o">/</span><span class="n">interval</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="nl">private:</span>
+    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rc</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/**
+ * Your TweetCounts object will be instantiated and called as such:
+ * TweetCounts* obj = new TweetCounts();
+ * obj-&gt;recordTweet(tweetName,time);
+ * vector&lt;int&gt; param_2 = obj-&gt;getTweetCountsPerFrequency(freq,tweetName,startTime,endTime);
+ */</span>
+</code></pre></div></div>
+
+<h2 id="1349-maximum-students-taking-exam-hard">1349. Maximum Students Taking Exam #Hard</h2>
+
+<h3 id="题目描述-3">题目描述</h3>
+
+<p>Given a <code class="language-plaintext highlighter-rouge">m * n</code> matrix <code class="language-plaintext highlighter-rouge">seats</code> that represent seats distributions in a classroom. If a seat is broken, it is denoted by <code class="language-plaintext highlighter-rouge">'#'</code> character otherwise it is denoted by a <code class="language-plaintext highlighter-rouge">'.'</code> character.</p>
+
+<p>Students can see the answers of those sitting next to the left, right, upper left and upper right, but he cannot see the answers of the student sitting directly in front or behind him. Return the <strong>maximum</strong> number of students that can take the exam together without any cheating being possible..</p>
+
+<p>Students must be placed in seats in good condition.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/01/29/image.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: seats = [["#",".","#","#",".","#"],
+                [".","#","#","#","#","."],
+                ["#",".","#","#",".","#"]]
+Output: 4
+Explanation: Teacher can place 4 students in available seats so they don't cheat on the exam. 
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: seats = [[".","#"],
+                ["#","#"],
+                ["#","."],
+                ["#","#"],
+                [".","#"]]
+Output: 3
+Explanation: Place all students in available seats. 
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: seats = [["#",".",".",".","#"],
+                [".","#",".","#","."],
+                [".",".","#",".","."],
+                [".","#",".","#","."],
+                ["#",".",".",".","#"]]
+Output: 10
+Explanation: Place students in available seats in column 1, 3 and 5.
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">seats</code> contains only characters <code class="language-plaintext highlighter-rouge">'.'</code> and <code class="language-plaintext highlighter-rouge">'#'</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">m == seats.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n == seats[i].length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= m &lt;= 8</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= n &lt;= 8</code></li>
+</ul>
+
+<h3 id="题目解析-3">题目解析</h3>
+
+<p>参考：<a href="https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem" target="_blank">A simple tutorial on this bitmasking problem</a></p>
+
+<p>P.S. 直接看参考链接吧，原作者的解析深入浅出，我就不班门弄斧了。等疫情结束回学校之后我自己也会写一篇关于位掩码运算的文章，家里的电脑太卡画不了图。</p>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">maxStudents</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;&gt;&amp;</span> <span class="n">seats</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">seats</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">n</span> <span class="o">=</span> <span class="n">seats</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">validity</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">cur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">seats</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">'.'</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">validity</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+        <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">valid</span> <span class="o">=</span> <span class="n">validity</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">j</span> <span class="o">&amp;</span> <span class="n">valid</span><span class="p">)</span> <span class="o">==</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)))</span> <span class="p">{</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">j</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="p">((</span><span class="n">j</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">k</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">__builtin_popcount</span><span class="p">(</span><span class="n">j</span><span class="p">));</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">*</span><span class="n">max_element</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">].</span><span class="n">begin</span><span class="p">(),</span> <span class="n">dp</span><span class="p">[</span><span class="n">m</span><span class="p">].</span><span class="n">end</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>

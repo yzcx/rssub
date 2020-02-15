@@ -1,0 +1,352 @@
+---
+layout:      post
+title:       LeetCode Weekly Contest 172 (1323~1326)
+link:        https://programcz.github.io/2020/02/03/LeetCode-Weekly-Contest-172-(1323-1326).html
+date:        2020-02-03 10:24:00
+category:    个人博客
+source:      ProgramCZ's Blog
+description: LeetCode周赛专题每周日更新，点击标签CAT - LeetCode Weekly Contest查看更多。  1323. Maximum 69 Number #Easy 题目描述 Given a positive integer num consisting only of digits 6 
+---
+
+<p>LeetCode周赛专题每周日更新，点击标签<code class="language-plaintext highlighter-rouge">CAT - LeetCode Weekly Contest</code>查看更多。</p>
+
+<!--more-->
+
+<h2 id="1323-maximum-69-number-easy">1323. Maximum 69 Number #Easy</h2>
+
+<h3 id="题目描述">题目描述</h3>
+
+<p>Given a positive integer <code class="language-plaintext highlighter-rouge">num</code> consisting only of digits 6 and 9.</p>
+
+<p>Return the maximum number you can get by changing <strong>at most</strong> one digit (6 becomes 9, and 9 becomes 6).</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 9669
+Output: 9969
+Explanation: 
+Changing the first digit results in 6669.
+Changing the second digit results in 9969.
+Changing the third digit results in 9699.
+Changing the fourth digit results in 9666. 
+The maximum number is 9969.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 9996
+Output: 9999
+Explanation: Changing the last digit 6 to 9 results in the maximum number.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: num = 9999
+Output: 9999
+Explanation: It is better not to apply any change.
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= num &lt;= 10^4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">num</code>’s digits are 6 or 9.</li>
+</ul>
+
+<h3 id="题目解析">题目解析</h3>
+
+<p>从头到尾遍历<code class="language-plaintext highlighter-rouge">num</code>的每一位数字，找到第一个<code class="language-plaintext highlighter-rouge">6</code>的位置，将其修改为<code class="language-plaintext highlighter-rouge">9</code>即可。</p>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">maximum69Number</span> <span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">9999</span><span class="p">)</span> <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">factor</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">factor</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">/</span> <span class="n">factor</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">factor</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">factor</span> <span class="o">/=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1324-print-words-vertically-medium">1324. Print Words Vertically #Medium</h2>
+
+<h3 id="题目描述-1">题目描述</h3>
+
+<p>Given a string <code class="language-plaintext highlighter-rouge">s</code>. Return all the words vertically in the same order in which they appear in <code class="language-plaintext highlighter-rouge">s</code>.
+Words are returned as a list of strings, complete with spaces when is necessary. (Trailing spaces are not allowed).
+Each word would be put on only one column and that in one column there will be only one word.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "HOW ARE YOU"
+Output: ["HAY","ORO","WEU"]
+Explanation: Each word is printed vertically. 
+"HAY"
+"ORO"
+"WEU"
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "TO BE OR NOT TO BE"
+Output: ["TBONTB","OEROOE","   T"]
+Explanation: Trailing spaces is not allowed. 
+"TBONTB"
+"OEROOE"
+"   T"
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: s = "CONTEST IS COMING"
+Output: ["CIC","OSO","N M","T I","E N","S G","T"]
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= s.length &lt;= 200</code></li>
+  <li><code class="language-plaintext highlighter-rouge">s</code> contains only upper case English letters.</li>
+  <li>It’s guaranteed that there is only one space between 2 words.</li>
+</ul>
+
+<h3 id="题目解析-1">题目解析</h3>
+
+<p>首先，将字符串<code class="language-plaintext highlighter-rouge">s</code>按照空格分割成子串存放到<code class="language-plaintext highlighter-rouge">words</code>中，同时记录子串的最大长度<code class="language-plaintext highlighter-rouge">max_length</code>；其次，将<code class="language-plaintext highlighter-rouge">words</code>中每个子串的每一位存放到<code class="language-plaintext highlighter-rouge">res</code>对应位置中，不足<code class="language-plaintext highlighter-rouge">max_length</code>的位置用空格补上；最后，将<code class="language-plaintext highlighter-rouge">res</code>中每个字符串末尾的空格删去即可。</p>
+
+<h4 id="c-实现-1">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">printVertically</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">words</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">max_length</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="n">beg</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">end</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">beg</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">((</span><span class="n">iter</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">beg</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="sc">' '</span><span class="p">))</span> <span class="o">!=</span> <span class="n">s</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">words</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">beg</span><span class="o">-</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">iter</span><span class="o">-</span><span class="n">beg</span><span class="p">));</span>
+            <span class="n">max_length</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iter</span><span class="o">-</span><span class="n">beg</span><span class="p">));</span>
+            <span class="n">beg</span> <span class="o">=</span> <span class="n">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">words</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">beg</span><span class="o">-</span><span class="n">s</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">iter</span><span class="o">-</span><span class="n">beg</span><span class="p">));</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">max_length</span><span class="p">,</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">iter</span><span class="o">-</span><span class="n">beg</span><span class="p">));</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">(</span><span class="n">max_length</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">word</span> <span class="o">:</span> <span class="n">words</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">max_length</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="sc">' '</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="n">str</span> <span class="o">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">str</span><span class="p">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">)</span>
+                <span class="n">str</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1325-delete-leaves-with-a-given-value-medium">1325. Delete Leaves With a Given Value #Medium</h2>
+
+<h3 id="题目描述-2">题目描述</h3>
+
+<p>Given a binary tree <code class="language-plaintext highlighter-rouge">root</code> and an integer <code class="language-plaintext highlighter-rouge">target</code>, delete all the <strong>leaf nodes</strong> with value <code class="language-plaintext highlighter-rouge">target</code>.</p>
+
+<p>Note that once you delete a leaf node with value <code class="language-plaintext highlighter-rouge">target</code>, if it’s parent node becomes a leaf node and has the value <code class="language-plaintext highlighter-rouge">target</code>, it should also be deleted (you need to continue doing that until you can’t).</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/01/09/sample_1_1684.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: root = [1,2,3,2,null,2,4], target = 2
+Output: [1,null,3,null,4]
+Explanation: Leaf nodes in green with value (target = 2) are removed (Picture in left). 
+After removing, new nodes become leaf nodes with value (target = 2) (Picture in center).
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/01/09/sample_2_1684.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: root = [1,3,3,3,2], target = 3
+Output: [1,3,null,null,2]
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/01/15/sample_3_1684.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: root = [1,2,null,2,null,2], target = 2
+Output: [1]
+Explanation: Leaf nodes in green with value (target = 2) are removed at each step.
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: root = [1,1,1], target = 1
+Output: []
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: root = [1,2,3], target = 1
+Output: [1,2,3]
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= target &lt;= 1000</code></li>
+  <li>Each tree has at most <code class="language-plaintext highlighter-rouge">3000</code> nodes.</li>
+  <li>Each node’s value is between <code class="language-plaintext highlighter-rouge">[1, 1000]</code>.</li>
+</ul>
+
+<h3 id="题目解析-2">题目解析</h3>
+
+<p>使用递归函数<code class="language-plaintext highlighter-rouge">bool helper(TreeNode *node, int target)</code>：</p>
+
+<ul>
+  <li>
+    <p>如果左节点存在且左节点的递归结果为<code class="language-plaintext highlighter-rouge">true</code>，则将左节点赋值为<code class="language-plaintext highlighter-rouge">nullptr</code>，右节点同理。</p>
+  </li>
+  <li>
+    <p>如果左右节点都为<code class="language-plaintext highlighter-rouge">nullptr</code>且值为<code class="language-plaintext highlighter-rouge">target</code>，说明该节点为需要删除的节点，则返回<code class="language-plaintext highlighter-rouge">true</code>。</p>
+  </li>
+</ul>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">removeLeafNodes</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span> <span class="k">return</span> <span class="nb">nullptr</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">bool</span> <span class="n">helper</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">helper</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">==</span> <span class="n">target</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1326-minimum-number-of-taps-to-open-to-water-a-garden-hard">1326. Minimum Number of Taps to Open to Water a Garden #Hard</h2>
+
+<h3 id="题目描述-3">题目描述</h3>
+
+<p>There is a one-dimensional garden on the x-axis. The garden starts at the point <code class="language-plaintext highlighter-rouge">0</code> and ends at the point <code class="language-plaintext highlighter-rouge">n</code>. (i.e The length of the garden is <code class="language-plaintext highlighter-rouge">n</code>).</p>
+
+<p>There are <code class="language-plaintext highlighter-rouge">n + 1</code> taps located at points <code class="language-plaintext highlighter-rouge">[0, 1, ..., n]</code> in the garden.</p>
+
+<p>Given an integer <code class="language-plaintext highlighter-rouge">n</code> and an integer array <code class="language-plaintext highlighter-rouge">ranges</code> of length <code class="language-plaintext highlighter-rouge">n + 1</code> where <code class="language-plaintext highlighter-rouge">ranges[i]</code> (0-indexed) means the <code class="language-plaintext highlighter-rouge">i-th</code> tap can water the area <code class="language-plaintext highlighter-rouge">[i - ranges[i], i + ranges[i]]</code> if it was open.</p>
+
+<p>Return the minimum number of taps that should be open to water the whole garden, If the garden cannot be watered return <strong>-1</strong>.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/01/16/1685_example_1.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: n = 5, ranges = [3,4,1,1,0,0]
+Output: 1
+Explanation: The tap at point 0 can cover the interval [-3,3]
+The tap at point 1 can cover the interval [-3,5]
+The tap at point 2 can cover the interval [1,3]
+The tap at point 3 can cover the interval [2,4]
+The tap at point 4 can cover the interval [4,4]
+The tap at point 5 can cover the interval [5,5]
+Opening Only the second tap will water the whole garden [0,5]
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: n = 3, ranges = [0,0,0,0]
+Output: -1
+Explanation: Even if you activate all the four taps you cannot water the whole garden.
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: n = 7, ranges = [1,2,1,0,2,1,0,1]
+Output: 3
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: n = 8, ranges = [4,0,0,0,0,0,0,0,4]
+Output: 2
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: n = 8, ranges = [4,0,0,0,4,0,0,0,4]
+Output: 1
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= n &lt;= 10^4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ranges.length == n + 1</code></li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= ranges[i] &lt;= 100</code></li>
+</ul>
+
+<h3 id="题目解析-3">题目解析</h3>
+
+<p>动态规划。首先，维护数组<code class="language-plaintext highlighter-rouge">nranges</code>，存放每个位置的洒水范围；其次，维护数组<code class="language-plaintext highlighter-rouge">dp</code>，下标为<code class="language-plaintext highlighter-rouge">i</code>的值表示喷洒<code class="language-plaintext highlighter-rouge">i</code>至<code class="language-plaintext highlighter-rouge">n</code>的范围需要开启的数量，初始值为<code class="language-plaintext highlighter-rouge">INT_MAX</code>；然后，从后向前遍历<code class="language-plaintext highlighter-rouge">nranges</code>：</p>
+
+<ul>
+  <li>
+    <p>如果下标为<code class="language-plaintext highlighter-rouge">i</code>的右洒水范围能够到达<code class="language-plaintext highlighter-rouge">n</code>，那么<code class="language-plaintext highlighter-rouge">dp[i]</code>的值为<code class="language-plaintext highlighter-rouge">1</code>。</p>
+  </li>
+  <li>
+    <p>遍历<code class="language-plaintext highlighter-rouge">i+1</code>至<code class="language-plaintext highlighter-rouge">n</code>的范围，如果下标为<code class="language-plaintext highlighter-rouge">i</code>的右洒水范围能够到达<code class="language-plaintext highlighter-rouge">j</code>的左洒水范围而且<code class="language-plaintext highlighter-rouge">dp[j]</code>的值不为<code class="language-plaintext highlighter-rouge">INT_MAX</code>（说明能够喷洒<code class="language-plaintext highlighter-rouge">j</code>至<code class="language-plaintext highlighter-rouge">n</code>的范围），那么更新<code class="language-plaintext highlighter-rouge">dp[i]</code>为<code class="language-plaintext highlighter-rouge">dp[i]</code>和<code class="language-plaintext highlighter-rouge">dp[j]+1</code>的较小值。</p>
+  </li>
+  <li>
+    <p>如果下标为<code class="language-plaintext highlighter-rouge">i</code>的左洒水范围能够到达<code class="language-plaintext highlighter-rouge">0</code>，那么更新<code class="language-plaintext highlighter-rouge">res</code>为<code class="language-plaintext highlighter-rouge">res</code>和<code class="language-plaintext highlighter-rouge">dp[i]</code>的较小值。</p>
+  </li>
+</ul>
+
+<p>最后，如果<code class="language-plaintext highlighter-rouge">res</code>的值未更新过，说明不能喷洒全部范围，返回<code class="language-plaintext highlighter-rouge">-1</code>，否则返回<code class="language-plaintext highlighter-rouge">res</code>即可。</p>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">minTaps</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">ranges</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">nranges</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">nranges</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">min</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">])});</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dp</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">nranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span> <span class="o">&gt;=</span> <span class="n">nranges</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="n">INT_MAX</span><span class="p">)</span>
+                    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nranges</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="p">)</span> <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>

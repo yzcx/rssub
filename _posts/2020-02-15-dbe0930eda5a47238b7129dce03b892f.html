@@ -1,0 +1,108 @@
+---
+layout:      post
+title:       RSSub部署及使用指南
+link:        https://programcz.github.io/2020/02/15/RSSub%E9%83%A8%E7%BD%B2%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html
+date:        2020-02-15 10:24:00
+category:    个人博客
+source:      ProgramCZ's Blog
+description: RSSub是一个无需自备服务器的RSS订阅器，完全由GitHub Actions驱动，同时也是一个无需专用客户端的RSS阅读器，完全由Jekyll和GitHub Pages驱动。  项目地址：ProgramCZ/RSSub，欢迎Star来支持项目继续维护。 1 为什么要使用RSSub   无需服务器
+---
+
+<p><strong>RSSub是一个无需自备服务器的RSS订阅器，完全由GitHub Actions驱动，同时也是一个无需专用客户端的RSS阅读器，完全由Jekyll和GitHub Pages驱动。</strong></p>
+
+<!--more-->
+
+<p><strong>项目地址：<a href="https://github.com/ProgramCZ/rssub" target="_blank">ProgramCZ/RSSub</a></strong>，欢迎Star来支持项目继续维护。</p>
+
+<h2 id="1-为什么要使用rssub">1 为什么要使用RSSub</h2>
+
+<ul>
+  <li>
+    <p><strong>无需服务器</strong>：用户添加订阅源并且设置同步时间，RSSub借助GitHub Actions自动运行爬虫脚本，即可拉取订阅内容。</p>
+  </li>
+  <li>
+    <p><strong>整理和排版</strong>：RSSub借助Jekyll自动整理和排版订阅内容。</p>
+  </li>
+  <li>
+    <p><strong>无需客户端</strong>：RSSub借助GitHub Pages向用户呈现订阅内容，用户使用浏览器访问指定地址，即可阅读订阅内容。</p>
+  </li>
+</ul>
+
+<h2 id="2-如何才能使用rssub">2 如何才能使用RSSub</h2>
+
+<h3 id="21-fork项目">2.1 Fork项目</h3>
+
+<p>项目地址：<a href="https://github.com/ProgramCZ/rssub" target="_blank">ProgramCZ/RSSub</a></p>
+
+<h3 id="22-添加订阅源">2.2 添加订阅源</h3>
+
+<p>在<code class="language-plaintext highlighter-rouge">scripts/subscribe.json</code>中可以添加订阅源，形式如下：</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+	</span><span class="nl">"Category-0"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		</span><span class="nl">"Feed-A"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://a.site/feed.xml"</span><span class="p">,</span><span class="w">
+		</span><span class="nl">"Feed-B"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://b.site/feed.xml"</span><span class="w">
+	</span><span class="p">},</span><span class="w">
+	</span><span class="nl">"Category-1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+		</span><span class="nl">"Feed-C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://c.site/feed.xml"</span><span class="w">
+	</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="23-设置同步时间">2.3 设置同步时间</h3>
+
+<p>在<code class="language-plaintext highlighter-rouge">.github/crawl-articles.yml</code>中可以设置同步时间，参考<a href="https://help.github.com/en/actions/reference/events-that-trigger-workflows#scheduled-events-schedule" target="_blank">ProgramCZ/RSSub</a>修改这里：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span> 
+  <span class="na">push</span><span class="pi">:</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="c1"># Update at 00:00, 04:00, 10:00, 14:00 of every day in UTC </span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0,4,10,14</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span> <span class="c1"># Modify here</span>
+</code></pre></div></div>
+
+<p>上述语句表示在每天的00:00，04:00，10:00和14:00同步订阅内容，需要注意的是此处为UTC时间，相当于北京时间减去八个小时。</p>
+
+<p>P.S. 时区问题将会在下一版本中解决。</p>
+
+<h3 id="24-开启pages服务">2.4 开启Pages服务</h3>
+
+<p>在项目主页的<code class="language-plaintext highlighter-rouge">Setting/Options</code>中开启Pages服务：</p>
+
+<div align="center"><img alt="title" src="https://cdn.jsdelivr.net/gh/ProgramCZ/image_cloud_a@master/2020-02/00.png" width="100%" /></div>
+
+<div align="center"><img alt="title" src="https://cdn.jsdelivr.net/gh/ProgramCZ/image_cloud_a@master/2020-02/01.png" width="100%" /></div>
+
+<h3 id="25-阅读订阅内容">2.5 阅读订阅内容</h3>
+
+<p>访问上图中显示的地址即可阅读订阅内容，比如我的地址为<a href="https://programcz.github.io/rssub" target="_blank">ProgramCZ’s RSSub</a>。</p>
+
+<h2 id="3-关于rssub的一些问题">3 关于RSSub的一些问题</h2>
+
+<h3 id="31-rssub是否构成对于github的滥用行为">3.1 RSSub是否构成对于GitHub的滥用行为</h3>
+
+<p>这是我在开发这个项目的时候最先考虑的问题，所以我已发邮件询问GitHub，还未收到回复。</p>
+
+<p>如果GitHub认为RSSHub构成滥用行为，我将立刻删除项目。</p>
+
+<h2 id="4-关于rssub的后续规划">4 关于RSSub的后续规划</h2>
+
+<ul class="task-list">
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />解决时区问题</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />解决某些站点的图片防盗链问题</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />优化排版</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />优化爬虫效率</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />支持分类浏览订阅内容</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />支持使用<code class="language-plaintext highlighter-rouge">OPML</code>文件管理订阅源</p>
+  </li>
+</ul>
