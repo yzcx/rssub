@@ -1,0 +1,36 @@
+name: Crawl Articles
+on: 
+  schedule:
+    - cron: '0 0,4,10,14 * * *'
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip lxml
+        pip install -r requirements.txt
+
+    - name: Start workers
+      run: |
+        python scripts/worker.py
+
+    - name: Commit files
+      run: |
+        git config --local user.email "zhaozengzhi1995@163.com"
+        git config --local user.name "ProgramCZ"
+        git add -A
+        git commit -m "Update Articles"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}

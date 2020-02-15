@@ -1,0 +1,17 @@
+{
+	"新兴媒体": {
+		"爱范儿": "https://www.ifanr.com/feed",
+		"知乎日报": "https://feedx.net/rss/zhihudaily.xml",
+		"好奇心日报 - 长文章": "https://rsshub.app/qdaily/tag/1068",
+		"好奇心日报 - 大公司头条": "https://rsshub.app/qdaily/tag/29"
+	},
+	"传统媒体": {
+		"新浪科技 - 滚动新闻": "https://rsshub.app/sina/rollnews"
+	},
+	"热门论坛": {
+		"V2EX - 最热主题": "https://rsshub.app/v2ex/topics/hot"
+	},
+	"个人博客": {
+		"ProgramCZ's Blog": "https://programcz.github.io/feed.xml"
+	}
+}
