@@ -1,0 +1,333 @@
+---
+layout:      post
+title:       LeetCode Weekly Contest 176 (1351~1354)
+link:        https://programcz.github.io/2020/02/16/LeetCode-Weekly-Contest-176-(1351-1354).html
+date:        2020-02-16 10:24:00
+category:    个人博客
+source:      ProgramCZ's Blog
+description: LeetCode周赛专题每周日更新，点击标签CAT - LeetCode Weekly Contest查看更多。 本次比赛通过3题，时间为1 12 31，排名为500+/8000+。  1351. Count Negative Numbers in a Sorted Matrix #Easy 题目描
+---
+
+<p>LeetCode周赛专题每周日更新，点击标签<code class="language-plaintext highlighter-rouge">CAT - LeetCode Weekly Contest</code>查看更多。</p>
+
+<p>本次比赛通过<code class="language-plaintext highlighter-rouge">3</code>题，时间为<code class="language-plaintext highlighter-rouge">1:12:31</code>，排名为<code class="language-plaintext highlighter-rouge">500+/8000+</code>。</p>
+
+<!--more-->
+
+<h2 id="1351-count-negative-numbers-in-a-sorted-matrix-easy">1351. Count Negative Numbers in a Sorted Matrix #Easy</h2>
+
+<h3 id="题目描述">题目描述</h3>
+
+<p>Given a <code class="language-plaintext highlighter-rouge">m * n</code> matrix <code class="language-plaintext highlighter-rouge">grid</code> which is sorted in non-increasing order both row-wise and column-wise.</p>
+
+<p>Return the number of <strong>negative</strong> numbers in <code class="language-plaintext highlighter-rouge">grid</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: grid = [[4,3,2,-1],[3,2,1,-1],[1,1,-1,-2],[-1,-1,-2,-3]]
+Output: 8
+Explanation: There are 8 negatives number in the matrix.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: grid = [[3,2],[1,0]]
+Output: 0
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: grid = [[1,-1],[-1,-1]]
+Output: 3
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: grid = [[-1]]
+Output: 1
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">m == grid.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n == grid[i].length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= m, n &lt;= 100</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-100 &lt;= grid[i][j] &lt;= 100</code></li>
+</ul>
+
+<h3 id="题目解析">题目解析</h3>
+
+<p>遍历判断是否为负数，负数则计数，否则跳过该行。需要注意的是，每一行从后向前遍历，因为矩阵从上向下也是非递增的，所以可以从上一行停下来的位置继续，从而节省时间。</p>
+
+<h4 id="c-实现">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">countNegatives</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">cnt</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">++</span><span class="n">cnt</span><span class="p">;</span>
+                <span class="k">else</span> <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">cnt</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1352-product-of-the-last-k-numbers-medium">1352. Product of the Last K Numbers #Medium</h2>
+
+<h3 id="题目描述-1">题目描述</h3>
+
+<p>Implement the class <code class="language-plaintext highlighter-rouge">ProductOfNumbers</code> that supports two methods:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">add(int num)</code></p>
+
+    <ul>
+      <li>Adds the number <code class="language-plaintext highlighter-rouge">num</code> to the back of the current list of numbers.</li>
+    </ul>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">getProduct(int k)</code></p>
+
+    <ul>
+      <li>Returns the product of the last <code class="language-plaintext highlighter-rouge">k</code> numbers in the current list.</li>
+      <li>You can assume that always the current list has <strong>at least</strong> <code class="language-plaintext highlighter-rouge">k</code> numbers.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>At any time, the product of any contiguous sequence of numbers will fit into a single 32-bit integer without overflowing.</p>
+
+<p><strong>Example:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input
+["ProductOfNumbers","add","add","add","add","add","getProduct","getProduct","getProduct","add","getProduct"]
+[[],[3],[0],[2],[5],[4],[2],[3],[4],[8],[2]]
+
+Output
+[null,null,null,null,null,null,20,40,0,null,32]
+
+Explanation
+ProductOfNumbers productOfNumbers = new ProductOfNumbers();
+productOfNumbers.add(3);        // [3]
+productOfNumbers.add(0);        // [3,0]
+productOfNumbers.add(2);        // [3,0,2]
+productOfNumbers.add(5);        // [3,0,2,5]
+productOfNumbers.add(4);        // [3,0,2,5,4]
+productOfNumbers.getProduct(2); // return 20. The product of the last 2 numbers is 5 * 4 = 20
+productOfNumbers.getProduct(3); // return 40. The product of the last 3 numbers is 2 * 5 * 4 = 40
+productOfNumbers.getProduct(4); // return 0. The product of the last 4 numbers is 0 * 2 * 5 * 4 = 0
+productOfNumbers.add(8);        // [3,0,2,5,4,8]
+productOfNumbers.getProduct(2); // return 32. The product of the last 2 numbers is 4 * 8 = 32 
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li>There will be at most <code class="language-plaintext highlighter-rouge">40000</code> operations considering both <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">getProduct</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">0 &lt;= num &lt;= 100</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= k &lt;= 40000</code></li>
+</ul>
+
+<h3 id="题目解析-1">题目解析</h3>
+
+<p>声明<code class="language-plaintext highlighter-rouge">vector&lt;pair&lt;int, int&gt;&gt; vp</code>，用于存放添加的数字和累乘的结果，在调用<code class="language-plaintext highlighter-rouge">getProduct(int k)</code>的时候，使用除法计算结果即可。当然，如果中间出现了<code class="language-plaintext highlighter-rouge">0</code>，就无法使用该方法了，此时直接遍历累乘即可。</p>
+
+<h4 id="c-实现-1">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ProductOfNumbers</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">ProductOfNumbers</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">vp</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">prod</span> <span class="o">*=</span> <span class="n">num</span><span class="p">;</span>
+        <span class="n">vp</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">num</span><span class="p">,</span> <span class="n">prod</span><span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="kt">int</span> <span class="n">getProduct</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">vp</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">vp</span><span class="p">.</span><span class="n">back</span><span class="p">().</span><span class="n">second</span> <span class="o">/</span> <span class="n">vp</span><span class="p">[</span><span class="n">vp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">second</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">vp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">vp</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="n">k</span><span class="p">;</span> <span class="o">--</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">res</span> <span class="o">*=</span> <span class="n">vp</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="nl">private:</span>
+    <span class="kt">int</span> <span class="n">prod</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">vp</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/**
+ * Your ProductOfNumbers object will be instantiated and called as such:
+ * ProductOfNumbers* obj = new ProductOfNumbers();
+ * obj-&gt;add(num);
+ * int param_2 = obj-&gt;getProduct(k);
+ */</span>
+</code></pre></div></div>
+
+<h2 id="1353-maximum-number-of-events-that-can-be-attended-medium">1353. Maximum Number of Events That Can Be Attended #Medium</h2>
+
+<h3 id="题目描述-2">题目描述</h3>
+
+<p>Given an array of <code class="language-plaintext highlighter-rouge">events</code> where <code class="language-plaintext highlighter-rouge">events[i] = [startDay_i, endDay_i]</code>. Every event <code class="language-plaintext highlighter-rouge">i</code> starts at <code class="language-plaintext highlighter-rouge">startDay_i</code> and ends at <code class="language-plaintext highlighter-rouge">endDay_i</code>.</p>
+
+<p>You can attend an event <code class="language-plaintext highlighter-rouge">i</code> at any day <code class="language-plaintext highlighter-rouge">d</code> where <code class="language-plaintext highlighter-rouge">startTime_i &lt;= d &lt;= endTime_i</code>. Notice that you can only attend one event at any time <code class="language-plaintext highlighter-rouge">d</code>.</p>
+
+<p>Return <em>the maximum number of events</em> you can attend.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<p><img src="https://assets.leetcode.com/uploads/2020/02/05/e1.png" alt="img" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: events = [[1,2],[2,3],[3,4]]
+Output: 3
+Explanation: You can attend all the three events.
+One way to attend them all is as shown.
+Attend the first event on day 1.
+Attend the second event on day 2.
+Attend the third event on day 3.
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: events= [[1,2],[2,3],[3,4],[1,2]]
+Output: 4
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: events = [[1,4],[4,4],[2,2],[3,4],[1,1]]
+Output: 4
+</code></pre></div></div>
+
+<p><strong>Example 4:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: events = [[1,100000]]
+Output: 1
+</code></pre></div></div>
+
+<p><strong>Example 5:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: events = [[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7]]
+Output: 7
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= events.length &lt;= 10^5</code></li>
+  <li><code class="language-plaintext highlighter-rouge">events[i].length == 2</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= events[i][0] &lt;= events[i][1] &lt;= 10^5</code></li>
+</ul>
+
+<h3 id="题目解析-2">题目解析</h3>
+
+<p>贪婪算法，优先参加当前可参加活动中最早结束的那个。首先，对<code class="language-plaintext highlighter-rouge">events</code>进行排序，使得开始早且结束早的活动排在前面；其次，声明优先队列<code class="language-plaintext highlighter-rouge">pq</code>，用于存放活动的结束日期，<code class="language-plaintext highlighter-rouge">greater&lt;int&gt;</code>保证结束最早的活动始终在堆顶；最后，遍历日期，将开始于<code class="language-plaintext highlighter-rouge">d</code>的活动添加到<code class="language-plaintext highlighter-rouge">pq</code>中，将在<code class="language-plaintext highlighter-rouge">d</code>之前已经结束的活动从<code class="language-plaintext highlighter-rouge">pq</code>中去除，此时如果<code class="language-plaintext highlighter-rouge">pq</code>还存在活动，则参加堆顶的活动并计数。</p>
+
+<h4 id="c-实现-2">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">maxEvents</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">events</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">pq</span><span class="p">;</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">events</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">events</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">events</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">d</span> <span class="o">&lt;=</span> <span class="mi">100000</span><span class="p">;</span> <span class="o">++</span><span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span>
+                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">)</span>
+                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pq</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="o">++</span><span class="n">res</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="1354-construct-target-array-with-multiple-sums-hard">1354. Construct Target Array With Multiple Sums #Hard</h2>
+
+<h3 id="题目描述-3">题目描述</h3>
+
+<p>Given an array of integers <code class="language-plaintext highlighter-rouge">target</code>. From a starting array, <code class="language-plaintext highlighter-rouge">A</code> consisting of all 1’s, you may perform the following procedure :</p>
+
+<ul>
+  <li>let <code class="language-plaintext highlighter-rouge">x</code> be the sum of all elements currently in your array.</li>
+  <li>choose index <code class="language-plaintext highlighter-rouge">i</code>, such that <code class="language-plaintext highlighter-rouge">0 &lt;= i &lt; target.size</code> and set the value of <code class="language-plaintext highlighter-rouge">A</code> at index <code class="language-plaintext highlighter-rouge">i</code> to <code class="language-plaintext highlighter-rouge">x</code>.</li>
+  <li>You may repeat this procedure as many times as needed.</li>
+</ul>
+
+<p>Return True if it is possible to construct the <code class="language-plaintext highlighter-rouge">target</code> array from <code class="language-plaintext highlighter-rouge">A</code> otherwise return False.</p>
+
+<p><strong>Example 1:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: target = [9,3,5]
+Output: true
+Explanation: Start with [1, 1, 1] 
+[1, 1, 1], sum = 3 choose index 1
+[1, 3, 1], sum = 5 choose index 2
+[1, 3, 5], sum = 9 choose index 0
+[9, 3, 5] Done
+</code></pre></div></div>
+
+<p><strong>Example 2:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: target = [1,1,1,2]
+Output: false
+Explanation: Impossible to create target array from [1,1,1,1].
+</code></pre></div></div>
+
+<p><strong>Example 3:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input: target = [8,5]
+Output: true
+</code></pre></div></div>
+
+<p><strong>Constraints:</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">N == target.length</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= target.length &lt;= 5 * 10^4</code></li>
+  <li><code class="language-plaintext highlighter-rouge">1 &lt;= target[i] &lt;= 10^9</code></li>
+</ul>
+
+<h3 id="题目解析-3">题目解析</h3>
+
+<p>首先，从<code class="language-plaintext highlighter-rouge">target</code>开始倒推计算过程，如果<code class="language-plaintext highlighter-rouge">target</code>满足题目条件，那么<code class="language-plaintext highlighter-rouge">target</code>中最大的数字<code class="language-plaintext highlighter-rouge">val</code>必然是最后一步时被替换的数字，此时倒推一步，还原该数字为<code class="language-plaintext highlighter-rouge">val-(sum-val)</code>，也就是<code class="language-plaintext highlighter-rouge">val</code>减去其他所有数字的和；其次，如果在倒推过程中，发现计算结果出现小于<code class="language-plaintext highlighter-rouge">1</code>的情况，那么就说明不可能倒推回单位数列，直接返回<code class="language-plaintext highlighter-rouge">false</code>即可；最后，判断数列的和<code class="language-plaintext highlighter-rouge">sum</code>是否等于<code class="language-plaintext highlighter-rouge">n</code>即可判断是否已经倒推回单位数列。</p>
+
+<h4 id="c-实现-3">C++ 实现</h4>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">bool</span> <span class="n">isPossible</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">target</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">long</span> <span class="kt">long</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">sum</span> <span class="o">+=</span> <span class="n">target</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">(</span><span class="n">target</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">target</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">sum</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">val</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="kt">long</span> <span class="kt">long</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">val</span> <span class="o">-</span> <span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">val</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+            <span class="n">sum</span> <span class="o">-=</span> <span class="n">val</span> <span class="o">-</span> <span class="n">tmp</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">sum</span> <span class="o">==</span> <span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
