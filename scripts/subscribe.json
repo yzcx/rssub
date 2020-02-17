@@ -3,8 +3,10 @@
 		"爱范儿": "https://www.ifanr.com/feed",
 		"知乎日报": "https://feedx.net/rss/zhihudaily.xml",
 		"好奇心日报 - 长文章": "https://rsshub.app/qdaily/tag/1068",
-		"好奇心日报 - 大公司头条": "https://rsshub.app/qdaily/tag/29"
+		"好奇心日报 - 大公司头条": "https://rsshub.app/qdaily/tag/29",
 		"果壳": "http://www.guokr.com/handpick/rss/?display=rss"
+		"澎湃新闻": "https://feedx.pw/rss/thepaper.xml"
+		"网易-轻松一刻": "https://feedx.pw/rss/163easy.xml"
 	},
 	"传统媒体": {
 		"新浪科技 - 滚动新闻": "https://rsshub.app/sina/rollnews"
