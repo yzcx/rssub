@@ -3,7 +3,7 @@ on:
   push:
   schedule:
     # Update at 00:00, 04:00, 10:00, 14:00 of every day in UTC 
-    - cron: '0 0,2,4,6,8,10,14,16,18,20,22,24, * * *' # Modify here
+    - cron:  '*/30 * * * *'
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -27,8 +27,8 @@ jobs:
 
     - name: Commit files
       run: |
-        git config --local user.email "zhaozengzhi1995@163.com"
-        git config --local user.name "ProgramCZ"
+        git config --local user.email "m18720841524@163.com"
+        git config --local user.name "rssub"
         git add -A
         git commit -m "Update Articles"
 
