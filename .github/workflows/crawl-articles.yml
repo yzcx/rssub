@@ -2,8 +2,7 @@ name: Crawl Articles
 on: 
   push:
   schedule:
-    # Update at 00:00, 04:00, 10:00, 14:00 of every day in UTC 
-    - cron:  '*/30 * * * *'
+    - cron: '0 21 * * *'
 jobs:
   crawl:
     runs-on: ubuntu-latest
