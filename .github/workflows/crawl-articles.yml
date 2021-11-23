@@ -2,7 +2,7 @@ name: Crawl Articles
 on: 
   push:
   schedule:
-    - cron: '0 0,4,10,14 * * *'
+    - cron: '0 21 * * *'
 jobs:
   crawl:
     runs-on: ubuntu-latest
